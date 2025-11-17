@@ -1,0 +1,1196 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Visit Portland, Maine • Lobster Lineup</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --lobster: #ff4937;
+      --ink: #141414;
+      --ink-soft: #4b4b4b;
+      --shell: #fff7f2;
+      --shell-deep: #fbe5db;
+      --line: #dfc9bd;
+      --card: #ffffff;
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 12px 40px rgba(0, 0, 0, 0.06);
+      --max-width: 960px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #ffffff 0, #fff3ec 46%, #ffe5d8 100%);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* NAV */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 247, 242, 0.98),
+        rgba(255, 247, 242, 0.92),
+        rgba(255, 247, 242, 0.88),
+        transparent
+      );
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0.75rem 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    .logo-mark::before,
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      width: 55%;
+      height: 55%;
+      border-radius: 999px 999px 40px 40px;
+      border: 2px solid var(--lobster);
+      border-bottom: none;
+      top: 48%;
+    }
+
+    .logo-mark::before {
+      left: 5%;
+      transform: rotate(-14deg);
+    }
+
+    .logo-mark::after {
+      right: 5%;
+      transform: rotate(14deg);
+    }
+
+    .logo-text-main {
+      font-weight: 700;
+      letter-spacing: 0.16em;
+    }
+
+    .logo-text-sub {
+      font-size: 0.75rem;
+      color: var(--ink-soft);
+      text-transform: none;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+    }
+
+    nav a {
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      color: var(--ink-soft);
+    }
+
+    nav a:hover {
+      border-color: rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .nav-cta {
+      border-radius: var(--radius-pill);
+      padding: 0.32rem 0.9rem;
+      background: var(--lobster);
+      color: #fff;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(255, 73, 55, 0.35);
+    }
+
+    .nav-cta:hover {
+      opacity: 0.94;
+      border-color: transparent;
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner {
+        padding-inline: 0.9rem;
+      }
+      nav a:nth-of-type(2),
+      nav a:nth-of-type(3) {
+        display: none;
+      }
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .shell {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2.25rem 1.1rem 2.8rem;
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 2rem;
+      align-items: center;
+    }
+
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--ink-soft);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.25rem, 4.2vw, 3rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      margin: 0 0 0.75rem;
+    }
+
+    .hero-title span {
+      color: var(--lobster);
+    }
+
+    .hero-copy {
+      font-size: 0.96rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      max-width: 30rem;
+    }
+
+    .hero-actions {
+      margin-top: 1.15rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .btn {
+      border-radius: var(--radius-pill);
+      padding: 0.6rem 1.1rem;
+      font-size: 0.85rem;
+      border: 1px solid rgba(0, 0, 0, 0.09);
+      background: #ffffff;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .btn-primary {
+      background: var(--lobster);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 14px 30px rgba(255, 73, 55, 0.35);
+      font-weight: 600;
+    }
+
+    .btn span.icon {
+      font-size: 1rem;
+      transform: translateY(1px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+    }
+
+    .hero-note {
+      margin-top: 0.7rem;
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+    }
+
+    .hero-card {
+      border-radius: 40px;
+      border: 1px solid var(--line);
+      padding: 1.4rem 1.3rem 1.2rem;
+      background: #fff;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background-image: radial-gradient(circle at top left, rgba(255, 73, 55, 0.08), transparent 60%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .hero-badge-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--lobster);
+    }
+
+    .hero-lobster-outline {
+      border-radius: 28px;
+      border: 1px dashed rgba(0, 0, 0, 0.08);
+      padding: 0.8rem 0.9rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
+      gap: 1rem;
+      position: relative;
+    }
+
+    @media (max-width: 880px) {
+      .hero-lobster-outline {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .hero-lobster {
+      position: relative;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--shell), #ffffff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.2rem 0.8rem;
+    }
+
+    .hero-lobster svg {
+      width: 120px;
+      max-width: 100%;
+      height: auto;
+      stroke: var(--lobster);
+    }
+
+    .hero-lobster-caption {
+      position: absolute;
+      bottom: 0.75rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.94);
+      padding: 0.22rem 0.7rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.75rem;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      color: var(--ink-soft);
+    }
+
+    .hero-grid-copy {
+      font-size: 0.84rem;
+      color: var(--ink-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.25rem;
+    }
+
+    .pill {
+      padding: 0.18rem 0.7rem;
+      border-radius: var(--radius-pill);
+      background: var(--shell);
+      border: 1px solid var(--line);
+      font-size: 0.75rem;
+      color: var(--ink-soft);
+    }
+
+    .hero-small-label {
+      font-size: 0.75rem;
+      color: var(--ink-soft);
+      margin-top: 0.8rem;
+    }
+
+    /* SECTION HEADER */
+    .section-header {
+      margin: 2.4rem 0 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.8rem;
+      align-items: baseline;
+    }
+
+    .section-title {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--ink-soft);
+    }
+
+    .section-sub {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+    }
+
+    /* EXPERIENCES */
+    #experiences {
+      margin-top: 0;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .chip {
+      border-radius: var(--radius-pill);
+      padding: 0.24rem 0.7rem;
+      font-size: 0.78rem;
+      border: 1px solid transparent;
+      background: transparent;
+      cursor: pointer;
+      color: var(--ink-soft);
+    }
+
+    .chip.active {
+      background: var(--lobster);
+      color: #fff;
+    }
+
+    .experience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    @media (max-width: 960px) {
+      .experience-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .experience-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      padding: 0.85rem 0.9rem;
+      background: var(--card);
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+    }
+
+    .card-label {
+      font-size: 0.76rem;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .card-title {
+      font-weight: 600;
+    }
+
+    .card-desc {
+      color: var(--ink-soft);
+      line-height: 1.45;
+    }
+
+    .card-meta {
+      margin-top: 0.2rem;
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+    }
+
+    .card-meta span {
+      display: inline-block;
+    }
+
+    .card-meta span::before {
+      content: "• ";
+      opacity: 0.7;
+    }
+
+    /* NEIGHBORHOODS */
+    .neighborhood-layout {
+      border-radius: 26px;
+      border: 1px solid var(--line);
+      padding: 1.2rem 1.1rem;
+      background: #fff;
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+      gap: 1.1rem;
+    }
+
+    @media (max-width: 880px) {
+      .neighborhood-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .neighborhood-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-size: 0.84rem;
+    }
+
+    .hood-item {
+      border-radius: var(--radius-pill);
+      padding: 0.4rem 0.7rem;
+      border: 1px solid transparent;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      color: var(--ink-soft);
+    }
+
+    .hood-item span.name {
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .hood-item span.tag {
+      font-size: 0.76rem;
+      opacity: 0.8;
+    }
+
+    .hood-item.active {
+      border-color: var(--lobster);
+      background: #fff4f2;
+      color: var(--ink);
+    }
+
+    .hood-detail {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .hood-detail h3 {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hood-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+    }
+
+    .hood-pill {
+      border-radius: var(--radius-pill);
+      padding: 0.2rem 0.6rem;
+      background: var(--shell);
+      border: 1px solid var(--line);
+    }
+
+    /* PLANNER */
+    .planner-shell {
+      border-radius: 26px;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 1.1rem 1.1rem 1.1rem;
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 1.1rem;
+    }
+
+    @media (max-width: 880px) {
+      .planner-shell {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .planner-main h3 {
+      margin: 0 0 0.4rem;
+      font-size: 1rem;
+    }
+
+    .planner-main p {
+      margin: 0;
+      font-size: 0.86rem;
+      color: var(--ink-soft);
+    }
+
+    .planner-controls {
+      margin-top: 0.7rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .planner-toggle {
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .planner-toggle input[type="checkbox"] {
+      accent-color: var(--lobster);
+    }
+
+    .planner-output {
+      margin-top: 0.8rem;
+      border-radius: 20px;
+      border: 1px dashed var(--line);
+      padding: 0.7rem 0.75rem;
+      font-size: 0.84rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      background: var(--shell);
+    }
+
+    .planner-slot {
+      display: flex;
+      gap: 0.45rem;
+    }
+
+    .planner-slot-time {
+      width: 4.1rem;
+      color: var(--ink-soft);
+    }
+
+    .planner-slot-text strong {
+      font-weight: 600;
+    }
+
+    .planner-note {
+      margin-top: 0.6rem;
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+    }
+
+    .planner-side {
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .planner-side-block {
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      padding: 0.6rem 0.7rem;
+      background: var(--shell);
+    }
+
+    .planner-side-block strong {
+      font-size: 0.86rem;
+    }
+
+    footer {
+      padding: 1.4rem 1.1rem 1.8rem;
+      font-size: 0.78rem;
+      color: var(--ink-soft);
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      padding-top: 1rem;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="nav-inner">
+        <div class="logo">
+          <div class="logo-mark" aria-hidden="true"></div>
+          <div>
+            <div class="logo-text-main">Portland, ME</div>
+            <div class="logo-text-sub">lobster, brick, harbor air</div>
+          </div>
+        </div>
+        <nav>
+          <a href="#experiences">Experiences</a>
+          <a href="#neighborhoods">Neighborhoods</a>
+          <a href="#planner">Day plan</a>
+          <a class="nav-cta" href="#planner">Start a day</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="shell">
+        <!-- HERO -->
+        <section class="hero" aria-labelledby="hero-heading">
+          <div>
+            <div class="hero-eyebrow">Small city • Big harbor energy</div>
+            <h1 id="hero-heading" class="hero-title">
+              A minimalist guide to <span>Portland, Maine</span>—
+              brick streets, ocean air, and a very serious lobster crush.
+            </h1>
+            <p class="hero-copy">
+              This page is a clean little moodboard for a Portland visit.
+              No booking widgets, no popups—just a lobster-themed way to pick
+              a neighborhood, a few experiences, and a simple day plan.
+            </p>
+            <div class="hero-actions">
+              <button class="btn btn-primary" data-scroll="#experiences">
+                Browse lobster-approved spots <span class="icon">↗</span>
+              </button>
+              <button class="btn btn-ghost" data-scroll="#planner">
+                Skip ahead to a one-day outline
+              </button>
+            </div>
+            <p class="hero-note">
+              Tip: screenshot the day plan at the bottom and drop it into your group chat.
+            </p>
+          </div>
+
+          <aside class="hero-card" aria-label="Lobster themed overview">
+            <div class="hero-badge">
+              <span class="hero-badge-dot"></span>
+              Built for curious visitors, skaters, coffee people, and lobster roll testers.
+            </div>
+            <div class="hero-lobster-outline">
+              <div class="hero-lobster">
+                <!-- simple lobster line illustration -->
+                <svg viewBox="0 0 120 140" fill="none" stroke-width="2.4">
+                  <path d="M60 20c-6 0-11-5-11-11 0-3 1-5 2-7" />
+                  <path d="M60 20c6 0 11-5 11-11 0-3-1-5-2-7" />
+                  <path d="M49 27c3-4 7-5 11-5s8 1 11 5" />
+                  <path d="M49 27c-4 5-6 11-6 20 0 11 3 19 17 19s17-8 17-19c0-9-2-15-6-20" />
+                  <path d="M60 66v38" />
+                  <path d="M60 72c-7 4-13 8-18 14" />
+                  <path d="M60 72c7 4 13 8 18 14" />
+                  <path d="M46 87c-3 5-5 10-6 16" />
+                  <path d="M74 87c3 5 5 10 6 16" />
+                  <path d="M54 104c2 7 3 13 6 18" />
+                  <path d="M66 104c-2 7-3 13-6 18" />
+                  <path d="M37 40c-6-2-10-7-11-13-1-5 1-9 4-12" />
+                  <path d="M83 40c6-2 10-7 11-13 1-5-1-9-4-12" />
+                </svg>
+                <div class="hero-lobster-caption">Lobster is the unofficial tour guide.</div>
+              </div>
+              <div class="hero-grid-copy">
+                <div>
+                  Short list, long weekend. Pick one
+                  neighborhood, a couple of experiences, and call it a trip.
+                </div>
+                <div class="pill-row">
+                  <div class="pill">Brick crosswalks</div>
+                  <div class="pill">Harbor walks</div>
+                  <div class="pill">Third-wave coffee</div>
+                  <div class="pill">Lobster rolls (obviously)</div>
+                </div>
+                <div class="hero-small-label">
+                  Everything here is rough and optional. Mix, match, ignore, redraw.
+                </div>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <!-- EXPERIENCES -->
+        <section id="experiences" aria-labelledby="experiences-heading">
+          <div class="section-header">
+            <div>
+              <div class="section-title">Experiences</div>
+              <div class="section-sub">
+                Filter by mood. Lobster not required, but strongly encouraged.
+              </div>
+            </div>
+          </div>
+
+          <div class="chip-row" aria-label="Filters">
+            <button class="chip active" data-filter="all">All</button>
+            <button class="chip" data-filter="coffee">Coffee</button>
+            <button class="chip" data-filter="water">Waterfront</button>
+            <button class="chip" data-filter="arts">Art</button>
+            <button class="chip" data-filter="night">Night</button>
+          </div>
+
+          <div class="experience-grid" id="experienceGrid">
+            <article class="card" data-category="coffee water">
+              <div class="card-label">Old Port</div>
+              <div class="card-title">Brick morning + harbor latte</div>
+              <p class="card-desc">
+                Start on the brick crosswalks, grab a latte, and wander toward the
+                working waterfront. Watch ferries and lobster boats shuffle around.
+              </p>
+              <div class="card-meta">
+                <span>2–3 hours</span>
+                <span>Zero car required</span>
+              </div>
+            </article>
+
+            <article class="card" data-category="water">
+              <div class="card-label">Eastern Prom</div>
+              <div class="card-title">Hilltop blanket + Casco Bay</div>
+              <p class="card-desc">
+                Bring snacks, pick a spot on the grass, and stare at the islands.
+                Simple, quiet, very “I live here now” energy.
+              </p>
+              <div class="card-meta">
+                <span>1–2 hours</span>
+                <span>Best at golden hour</span>
+              </div>
+            </article>
+
+            <article class="card" data-category="arts coffee">
+              <div class="card-label">Arts District</div>
+              <div class="card-title">Museums + notebook pages</div>
+              <p class="card-desc">
+                Rotate between galleries, the Portland Museum of Art, and nearby
+                cafés. Sketch, write, or just people-watch.
+              </p>
+              <div class="card-meta">
+                <span>Rain friendly</span>
+                <span>2–4 hours</span>
+              </div>
+            </article>
+
+            <article class="card" data-category="coffee">
+              <div class="card-label">East Bayside</div>
+              <div class="card-title">Roasteries + side streets</div>
+              <p class="card-desc">
+                Follow the smell of fresh beans through old industrial blocks now
+                filled with roasteries, studios, and small-batch everything.
+              </p>
+              <div class="card-meta">
+                <span>Caffeine-forward</span>
+                <span>Easy to loop with waterfront</span>
+              </div>
+            </article>
+
+            <article class="card" data-category="water arts">
+              <div class="card-label">Islands</div>
+              <div class="card-title">Casco Bay ferry loop</div>
+              <p class="card-desc">
+                Ride the ferry out, walk a little, take photos that look like a
+                different country, and ride back as the city lights turn on.
+              </p>
+              <div class="card-meta">
+                <span>Half-day</span>
+                <span>Pack layers</span>
+              </div>
+            </article>
+
+            <article class="card" data-category="night">
+              <div class="card-label">Downtown</div>
+              <div class="card-title">Low-key night circuit</div>
+              <p class="card-desc">
+                Quiet bars, local beer, late slices. Nothing wild, everything
+                walkable. You might end up planning your move here.
+              </p>
+              <div class="card-meta">
+                <span>Night</span>
+                <span>Best with a small crew</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- NEIGHBORHOODS -->
+        <section id="neighborhoods" aria-labelledby="neighborhoods-heading">
+          <div class="section-header">
+            <div>
+              <div class="section-title" id="neighborhoods-heading">Neighborhoods</div>
+              <div class="section-sub">
+                Pick one area as your “dock”—let everything else be a short wander away.
+              </div>
+            </div>
+          </div>
+
+          <div class="neighborhood-layout">
+            <div class="neighborhood-list" aria-label="Neighborhood selector">
+              <button class="hood-item active" data-hood="oldport">
+                <span class="name">Old Port</span>
+                <span class="tag">brick lanes + lobster rolls</span>
+              </button>
+              <button class="hood-item" data-hood="munjoy">
+                <span class="name">Munjoy Hill</span>
+                <span class="tag">sunrise + quiet streets</span>
+              </button>
+              <button class="hood-item" data-hood="east">
+                <span class="name">East Bayside</span>
+                <span class="tag">coffee + makers</span>
+              </button>
+              <button class="hood-item" data-hood="west">
+                <span class="name">West End</span>
+                <span class="tag">leafy and slow</span>
+              </button>
+            </div>
+
+            <div class="hood-detail" id="hoodDetail">
+              <h3>Old Port • Brick streets by the harbor</h3>
+              <p>
+                Classic Portland: brick sidewalks, working wharves, and signs for
+                lobster everything. Stay here if you want to walk out the door and
+                immediately feel like you’re in the postcard version of the city.
+              </p>
+              <div class="hood-meta">
+                <span class="hood-pill">Best if it’s your first visit</span>
+                <span class="hood-pill">Easy to do without a car</span>
+                <span class="hood-pill">Close to ferries + Old Port shops</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PLANNER -->
+        <section id="planner" aria-labelledby="planner-heading">
+          <div class="section-header">
+            <div>
+              <div class="section-title" id="planner-heading">Day plan</div>
+              <div class="section-sub">
+                Tap once, get a simple outline. Nothing locked in, everything editable.
+              </div>
+            </div>
+          </div>
+
+          <div class="planner-shell">
+            <div class="planner-main">
+              <h3>Build a one-day Portland outline</h3>
+              <p>
+                Hit the button and we’ll pull three ideas from the experiences above:
+                one for morning, one for afternoon, one for evening.
+              </p>
+              <div class="planner-controls">
+                <button class="btn btn-primary" id="buildDayBtn">
+                  Shuffle my day <span class="icon">✨</span>
+                </button>
+                <label class="planner-toggle">
+                  <input type="checkbox" id="keepCoffee" checked />
+                  <span>Always include at least one coffee stop</span>
+                </label>
+              </div>
+              <div class="planner-output" id="plannerOutput">
+                <div class="planner-slot">
+                  <div class="planner-slot-time">Morning</div>
+                  <div class="planner-slot-text">
+                    Press “Shuffle my day” to generate a simple outline.
+                  </div>
+                </div>
+              </div>
+              <p class="planner-note">
+                Once it looks right, screenshot this box. That’s your Portland plan.
+              </p>
+            </div>
+
+            <aside class="planner-side">
+              <div class="planner-side-block">
+                <strong>Good seasons</strong>
+                <p>
+                  Spring to fall for ferries, patios, and walking everywhere.
+                  Winter for quiet streets, snow, and café hopping.
+                </p>
+              </div>
+              <div class="planner-side-block">
+                <strong>Lobster expectations check</strong>
+                <p>
+                  You don’t have to eat six lobster rolls to “do” Portland. One
+                  really good one, plus a walk near the water, is enough.
+                </p>
+              </div>
+            </aside>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <span>Minimalist Portland, ME guide • lobster-themed and offline-friendly.</span>
+        <span>Duplicate this HTML, swap in your own spots, and re‑share.</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // smooth scroll
+    document.querySelectorAll("[data-scroll]").forEach(function (el) {
+      el.addEventListener("click", function () {
+        var target = document.querySelector(el.getAttribute("data-scroll"));
+        if (!target) return;
+        window.scrollTo({
+          top: target.offsetTop - 72,
+          behavior: "smooth",
+        });
+      });
+    });
+
+    // experience filter
+    var chips = document.querySelectorAll(".chip");
+    var cards = document.querySelectorAll(".experience-grid .card");
+
+    chips.forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        chips.forEach(function (c) {
+          c.classList.remove("active");
+        });
+        chip.classList.add("active");
+
+        var filter = chip.getAttribute("data-filter");
+        cards.forEach(function (card) {
+          var cat = card.getAttribute("data-category");
+          if (filter === "all" || cat.indexOf(filter) !== -1) {
+            card.style.display = "flex";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      });
+    });
+
+    // neighborhoods content
+    var hoodCopy = {
+      oldport: {
+        title: "Old Port • Brick streets by the harbor",
+        body:
+          "Classic Portland: brick sidewalks, working wharves, and signs for lobster everything. Stay here if you want to walk out the door and immediately feel like you’re in the postcard version of the city.",
+        meta: [
+          "Best if it’s your first visit",
+          "Easy to do without a car",
+          "Close to ferries + Old Port shops",
+        ],
+      },
+      munjoy: {
+        title: "Munjoy Hill • Quiet streets + huge views",
+        body:
+          "Residential blocks that slope toward the Eastern Prom. Great coffee, a small main street, and one of the best sunrise spots in town.",
+        meta: [
+          "Best for slow mornings",
+          "Easy walk to Eastern Prom",
+          "A little uphill, very worth it",
+        ],
+      },
+      east: {
+        title: "East Bayside • Roasteries and makers",
+        body:
+          "A compact area where old industrial buildings now hold roasteries, breweries, studios, and small creative shops.",
+        meta: [
+          "Great if you love coffee + craft",
+          "Walkable to the water",
+          "Feels like the in-progress side of the city",
+        ],
+      },
+      west: {
+        title: "West End • Leafy, quiet, residential",
+        body:
+          "Tree-lined streets, historic homes, and small restaurants. It feels more like a neighborhood than a downtown.",
+        meta: [
+          "Nice for evening walks",
+          "Calmer than the Old Port",
+          "Good base if you like slower trips",
+        ],
+      },
+    };
+
+    var hoodButtons = document.querySelectorAll(".hood-item");
+    var hoodDetail = document.getElementById("hoodDetail");
+
+    function renderHood(key) {
+      var data = hoodCopy[key];
+      if (!data) return;
+      hoodDetail.innerHTML = "";
+      var h3 = document.createElement("h3");
+      h3.textContent = data.title;
+      var p = document.createElement("p");
+      p.textContent = data.body;
+      var metaWrap = document.createElement("div");
+      metaWrap.className = "hood-meta";
+      data.meta.forEach(function (m) {
+        var span = document.createElement("span");
+        span.className = "hood-pill";
+        span.textContent = m;
+        metaWrap.appendChild(span);
+      });
+      hoodDetail.appendChild(h3);
+      hoodDetail.appendChild(p);
+      hoodDetail.appendChild(metaWrap);
+    }
+
+    hoodButtons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        hoodButtons.forEach(function (b) {
+          b.classList.remove("active");
+        });
+        btn.classList.add("active");
+        var hood = btn.getAttribute("data-hood");
+        renderHood(hood);
+      });
+    });
+
+    // planner
+    var buildDayBtn = document.getElementById("buildDayBtn");
+    var plannerOutput = document.getElementById("plannerOutput");
+    var keepCoffee = document.getElementById("keepCoffee");
+
+    function getExperiences() {
+      var all = [];
+      cards.forEach(function (card) {
+        if (card.style.display === "none") return; // only from visible grid
+        var title = card.querySelector(".card-title").textContent.trim();
+        var desc = card.querySelector(".card-desc").textContent.trim();
+        var cat = card.getAttribute("data-category");
+        all.push({ title: title, desc: desc, category: cat });
+      });
+      return all;
+    }
+
+    function randomPick(arr, count) {
+      var copy = arr.slice();
+      var chosen = [];
+      while (copy.length && chosen.length < count) {
+        var idx = Math.floor(Math.random() * copy.length);
+        chosen.push(copy.splice(idx, 1)[0]);
+      }
+      return chosen;
+    }
+
+    buildDayBtn.addEventListener("click", function () {
+      var experiences = getExperiences();
+      if (!experiences.length) return;
+
+      var morning, afternoon, evening;
+
+      if (keepCoffee.checked) {
+        var coffeeSpots = experiences.filter(function (e) {
+          return e.category.indexOf("coffee") !== -1;
+        });
+        if (coffeeSpots.length) {
+          morning = randomPick(coffeeSpots, 1)[0];
+          experiences = experiences.filter(function (e) {
+            return e !== morning;
+          });
+        }
+      }
+
+      var rest = randomPick(experiences, 3);
+      if (!morning) {
+        morning = rest[0];
+        afternoon = rest[1];
+        evening = rest[2];
+      } else {
+        afternoon = rest[0];
+        evening = rest[1];
+      }
+
+      plannerOutput.innerHTML = "";
+
+      function addSlot(label, exp) {
+        if (!exp) return;
+        var slot = document.createElement("div");
+        slot.className = "planner-slot";
+
+        var time = document.createElement("div");
+        time.className = "planner-slot-time";
+        time.textContent = label;
+
+        var textWrap = document.createElement("div");
+        textWrap.className = "planner-slot-text";
+        var strong = document.createElement("strong");
+        strong.textContent = exp.title + " ";
+        var text = document.createElement("span");
+        text.textContent = exp.desc;
+
+        textWrap.appendChild(strong);
+        textWrap.appendChild(text);
+
+        slot.appendChild(time);
+        slot.appendChild(textWrap);
+        plannerOutput.appendChild(slot);
+      }
+
+      addSlot("Morning", morning);
+      addSlot("Afternoon", afternoon);
+      addSlot("Evening", evening);
+    });
+  </script>
+</body>
+</html>
